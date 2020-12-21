@@ -30,12 +30,9 @@ const users = [
    */
   toggleUserState(users, 'Mango', logger);
   toggleUserState(users, 'Lux', logger);
-  
+
   /*
    * Должно работать так
    */
   toggleUserState2(users, 'Mango').then(logger);
   toggleUserState2(users, 'Lux').then(logger);
-  
-
-
