@@ -7,10 +7,20 @@ const users = [
   
   const toggleUserState = (allUsers, userName, callback) => {
     const updatedUsers = allUsers.map(user =>
-      user.name === userName ? { ...user, active: !user.active } : user,
+        user.name === userName ? { ...user, active: !user.active } : user
     );
-  
+
     callback(updatedUsers);
+};
+  
+  const toggleUserState2 = (allUsers, userName) => {
+    return new Promise((resolve, reject) => {
+        const updatedUsers = allUsers.map(user =>
+            user.name === userName ? { ...user, active: !user.active } : user
+        );
+  
+        resolve(updatedUsers);
+    });
   };
   
   const logger = updatedUsers => console.table(updatedUsers);
@@ -24,5 +34,8 @@ const users = [
   /*
    * Должно работать так
    */
-  toggleUserState(users, 'Mango').then(logger);
-  toggleUserState(users, 'Lux').then(logger);
+  toggleUserState2(users, 'Mango').then(logger);
+  toggleUserState2(users, 'Lux').then(logger);
+  
+
+

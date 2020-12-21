@@ -16,8 +16,29 @@ const randomIntegerFromInterval = (min, max) => {
     }, delay);
   };
   
+  const makeTransaction2 = transaction => {
+    const delay = randomIntegerFromInterval(200, 500);
+    return new Promise((resolve, reject) => {
+        let id = transaction.id;
+        setTimeout(() => {
+            const canProcess = Math.random() > 0.3;
+            
+            if (canProcess) {
+                const result = {id, delay};
+                resolve(result);
+            } else {
+                reject(Error(transaction.id));
+            }
+        }, delay);
+    });
+};
+
   const logSuccess = (id, time) => {
-    console.log(`Transaction ${id} processed in ${time}ms`);
+      console.log(`Transaction ${id} processed in ${time}ms`);
+  };
+
+  const logSuccess2 = (result) => {
+    console.log(`Transaction ${result.id} processed in ${result.delay}ms`);
   };
   
   const logError = id => {
@@ -34,18 +55,18 @@ const randomIntegerFromInterval = (min, max) => {
   /*
    * Должно работать так
    */
-  makeTransaction({ id: 70, amount: 150 })
-    .then(logSuccess)
+  makeTransaction2({ id: 70, amount: 150 })
+    .then(logSuccess2)
     .catch(logError);
   
-  makeTransaction({ id: 71, amount: 230 })
-    .then(logSuccess)
+  makeTransaction2({ id: 71, amount: 230 })
+    .then(logSuccess2)
     .catch(logError);
   
-  makeTransaction({ id: 72, amount: 75 })
-    .then(logSuccess)
+  makeTransaction2({ id: 72, amount: 75 })
+    .then(logSuccess2)
     .catch(logError);
   
-  makeTransaction({ id: 73, amount: 100 })
-    .then(logSuccess)
+  makeTransaction2({ id: 73, amount: 100 })
+    .then(logSuccess2)
     .catch(logError);
